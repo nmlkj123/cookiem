@@ -318,7 +318,7 @@ def req_ensure_env():
 
     if sys.platform.startswith('win'):
         log.info("Adding local bins/ folder to path")
-        os.environ['PATH'] += ';' + os.path.abspath('bin/')
+        os.environ['bot_token']
         sys.path.append(os.path.abspath('bin/')) # might as well
 
 
