@@ -479,11 +479,11 @@ class MusicBot(discord.Client):
                 newmsg = '%s - your song `%s` is now playing in `%s`!' % (
                     entry.meta['author'].mention, entry.title, player.voice_client.channel.name)
             else:
-                newmsg = 'Now playing in `%s`: `%s` added by `%s`' % (
+                newmsg = '♥ `%s` 에서 다음곡을 재생 합니다. ♥\n ★ 제목 : `%s` ★\n ★ 신청자 : `%s` ★\n▶ 신청곡 신청방법: !play 제목 또는 링크 예)!play https://youtu.be/4OSu1MsKaZw' % (
                     player.voice_client.channel.name, entry.title, entry.meta['author'].name)
         else:
             # no author (and channel), it's an autoplaylist (or autostream from my other PR) entry.
-            newmsg = 'Now playing automatically added entry `%s` in `%s`' % (
+            newmsg = '♥ 다음곡을 자동 재생 합니다. ♥\n ★ 제목 : `%s` ★\n ★ 채널 : `%s`★\n▶ 신청곡 신청방법: !play 제목 또는 링크 예)!play https://youtu.be/4OSu1MsKaZw' % (
                 entry.title, player.voice_client.channel.name)
 
         if newmsg:
