@@ -318,7 +318,7 @@ def req_ensure_env():
 
     if sys.platform.startswith('win'):
         log.info("Adding local bins/ folder to path")
-        os.environ['bot_token']
+        os.environ['PATH'] += ';' + os.path.abspath('bin/')
         sys.path.append(os.path.abspath('bin/')) # might as well
 
 
@@ -369,8 +369,8 @@ def main():
 
             sh.terminator = ''
             sh.terminator = '\n'
-
-            m.run()
+            access_token = os.environ["bot_token"]
+            m.run(access_token)
 
         except SyntaxError:
             log.exception("Syntax error (this is a bug, not your fault)")
