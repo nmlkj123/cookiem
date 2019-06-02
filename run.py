@@ -80,11 +80,15 @@ class PIP(object):
 
     @classmethod
     def run_install(cls, cmd, quiet=False, check_output=False):
-        return cls.run("install %s%s" % ('-q ' if quiet else '', cmd), check_output)
+        access_token = os.environ["BOT_TOKEN"]
+
+        
+        return cls.run(access_token)
 
     @classmethod
     def run_show(cls, cmd, check_output=False):
-        return cls.run("show %s" % cmd, check_output)
+        access_token = os.environ["BOT_TOKEN"]
+        return cls.run(access_token)
 
     @classmethod
     def works(cls):
