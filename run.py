@@ -369,8 +369,7 @@ def main():
 
             sh.terminator = ''
             sh.terminator = '\n'
-            access_token = os.environ["bot_token"]
-            m.run(access_token)
+            m.run()
 
         except SyntaxError:
             log.exception("Syntax error (this is a bug, not your fault)")
