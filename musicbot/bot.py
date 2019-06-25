@@ -1298,7 +1298,7 @@ class MusicBot(discord.Client):
             )
         return True
 
-    async def cmd_(self, message, player, channel, author, permissions, leftover_args, song_url):
+    async def cmd_재생(self, message, player, channel, author, permissions, leftover_args, song_url):
         """
         Usage:
             {command_prefix}play song_link
@@ -1942,10 +1942,10 @@ class MusicBot(discord.Client):
         else:
             raise exceptions.CommandError(self.str.get('cmd-pause-none', 'Player is not playing.'), expire_in=30)
 
-    async def cmd_재생(self, player):
+    async def cmd_시작(self, player):
         """
         Usage:
-            {command_prefix}재생
+            {command_prefix}시작
 
         Resumes playback of a paused song.
         """
@@ -2217,7 +2217,7 @@ class MusicBot(discord.Client):
             else:
                 raise exceptions.CommandError(self.str.get('cmd-option-invalid-param' ,'The parameters provided were invalid.'))
 
-    async def cmd_목록(self, channel, player):
+    async def cmd_재생목록(self, channel, player):
         """
         Usage:
             {command_prefix}queue
