@@ -478,7 +478,7 @@ class MusicBot(discord.Client):
             elif self.config.now_playing_mentions:
                 newmsg = '%s - your song `%s` is now playing in `%s`!' % (
                     entry.meta['author'].mention, entry.title, player.voice_client.channel.name)
-            else:
+            #else:
                 #newmsg = '♥ `%s` 에서 다음곡을 재생 합니다. ♥\n ★ 제목 : `%s` ★\n ★ 신청자 : `%s` ★\n▶ 신청곡 신청방법: !play 제목 또는 링크 예)!play https://youtu.be/4OSu1MsKaZw' % (
                     #player.voice_client.channel.name, entry.title, entry.meta['author'].name)
         else:
