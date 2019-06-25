@@ -1692,7 +1692,7 @@ class MusicBot(discord.Client):
 
         return Response(self.str.get('cmd-stream-success', "Streaming."), delete_after=6)
 
-    async def cmd_(self, message, player, channel, author, permissions, leftover_args):
+    async def cmd_검색(self, message, player, channel, author, permissions, leftover_args):
         """
         Usage:
             {command_prefix}search [service] [number] query
@@ -1726,7 +1726,7 @@ class MusicBot(discord.Client):
                 # noinspection PyUnresolvedReferences
                 raise exceptions.CommandError(
                     self.str.get('cmd-search-noquery', "Please specify a search query.\n%s") % dedent(
-                        self.cmd_검색.__doc__.format(command_prefix=self.config.command_prefix)),
+                        self.cmd_.__doc__.format(command_prefix=self.config.command_prefix)),
                     expire_in=60
                 )
 
