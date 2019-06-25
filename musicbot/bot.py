@@ -1817,7 +1817,7 @@ class MusicBot(discord.Client):
 
         return Response(self.str.get('cmd-search-decline', "Oh well :("), delete_after=30)
 
-    async def cmd_np(self, player, channel, guild, message):
+    async def cmd_현재노래(self, player, channel, guild, message):
         """
         Usage:
             {command_prefix}np
@@ -1927,10 +1927,10 @@ class MusicBot(discord.Client):
 
         return Response(self.str.get('cmd-summon-reply', 'Connected to `{0.name}`').format(author.voice.channel))
 
-    async def cmd_pause(self, player):
+    async def cmd_정지(self, player):
         """
         Usage:
-            {command_prefix}pause
+            {command_prefix}정지
 
         Pauses playback of the current song.
         """
@@ -1942,10 +1942,10 @@ class MusicBot(discord.Client):
         else:
             raise exceptions.CommandError(self.str.get('cmd-pause-none', 'Player is not playing.'), expire_in=30)
 
-    async def cmd_resume(self, player):
+    async def cmd_재생(self, player):
         """
         Usage:
-            {command_prefix}resume
+            {command_prefix}재생
 
         Resumes playback of a paused song.
         """
@@ -1957,10 +1957,10 @@ class MusicBot(discord.Client):
         else:
             raise exceptions.CommandError(self.str.get('cmd-resume-none', 'Player is not paused.'), expire_in=30)
 
-    async def cmd_shuffle(self, channel, player):
+    async def cmd_랜덤(self, channel, player):
         """
         Usage:
-            {command_prefix}shuffle
+            {command_prefix}
 
         Shuffles the server's queue.
         """
@@ -2217,7 +2217,7 @@ class MusicBot(discord.Client):
             else:
                 raise exceptions.CommandError(self.str.get('cmd-option-invalid-param' ,'The parameters provided were invalid.'))
 
-    async def cmd_queue(self, channel, player):
+    async def cmd_목록(self, channel, player):
         """
         Usage:
             {command_prefix}queue
