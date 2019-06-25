@@ -478,12 +478,11 @@ class MusicBot(discord.Client):
             elif self.config.now_playing_mentions:
                 newmsg = '%s - your song `%s` is now playing in `%s`!' % (
                     entry.meta['author'].mention, entry.title, player.voice_client.channel.name)
-            #else:
-                #newmsg = '♥ `%s` 에서 다음곡을 재생 합니다. ♥\n ★ 제목 : `%s` ★\n ★ 신청자 : `%s` ★\n▶ 신청곡 신청방법: !play 제목 또는 링크 예)!play https://youtu.be/4OSu1MsKaZw' % (
-                    #player.voice_client.channel.name, entry.title, entry.meta['author'].name)
+            else:
+                newmsg = '' 
         else:
             # no author (and channel), it's an autoplaylist (or autostream from my other PR) entry.
-            newmsg = '♥ 다음곡을 자동 재생 합니다. ♥\n ★ 제목 : `%s` ★\n ★ 채널 : `%s`★\n▶ 신청곡 신청방법: !play 제목 또는 링크 예)!play https://youtu.be/4OSu1MsKaZw' % (
+            newmsg = 'Now playing automatically added entry `%s` in `%s`' % (
                 entry.title, player.voice_client.channel.name)
 
         if newmsg:
@@ -1119,7 +1118,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}resetplaylist
-
         Resets all songs in the server's autoplaylist
         """
         player.autoplaylist = list(set(self.autoplaylist))
@@ -1129,7 +1127,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}help [command]
-
         Prints a help message.
         If a command is specified, it prints a help message for that command.
         Otherwise, it lists the available commands.
@@ -1173,7 +1170,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}blacklist [ + | - | add | remove ] @UserName [@UserName2 ...]
-
         Add or remove users to the blacklist.
         Blacklisted users are forbidden from using bot commands.
         """
@@ -1220,7 +1216,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}id [@user]
-
         Tells the user their id or the id of another user.
         """
         if not user_mentions:
@@ -1233,7 +1228,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}save [url]
-
         Saves the specified song or current song if not specified to the autoplaylist.
         """
         if url or (player.current_entry and not isinstance(player.current_entry, StreamPlaylistEntry)):
@@ -1255,7 +1249,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}joinserver invite_link
-
         Asks the bot to join a server.  Note: Bot accounts cannot use invite links.
         """
 
@@ -1269,7 +1262,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}karaoke
-
         Activates karaoke mode. During karaoke mode, only groups with the BypassKaraokeMode
         permission in the config file can queue music.
         """
@@ -1304,10 +1296,8 @@ class MusicBot(discord.Client):
             {command_prefix}play song_link
             {command_prefix}play text to search for
             {command_prefix}play spotify_uri
-
         Adds the song to the playlist.  If a link is not provided, the first
         result from a youtube search is added to the queue.
-
         If enabled in the config, the bot will also support Spotify URIs, however
         it will use the metadata (e.g song name and artist) to find a YouTube
         equivalent of the song. Streaming from Spotify is not possible.
@@ -1668,7 +1658,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}stream song_link
-
         Enqueue a media stream.
         This could mean an actual stream like Twitch or shoutcast, or simply streaming
         media without predownloading it.  Note: FFmpeg is notoriously bad at handling
@@ -1696,7 +1685,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}search [service] [number] query
-
         Searches a service for a video and adds it to the queue.
         - service: any one of the following services:
             - youtube (yt) (default if unspecified)
@@ -1726,7 +1714,7 @@ class MusicBot(discord.Client):
                 # noinspection PyUnresolvedReferences
                 raise exceptions.CommandError(
                     self.str.get('cmd-search-noquery', "Please specify a search query.\n%s") % dedent(
-                        self.cmd_.__doc__.format(command_prefix=self.config.command_prefix)),
+                        self.cmd_검색.__doc__.format(command_prefix=self.config.command_prefix)),
                     expire_in=60
                 )
 
@@ -1806,7 +1794,7 @@ class MusicBot(discord.Client):
 
             if str(reaction.emoji) == '\u2705':  # check
                 await self.safe_delete_message(result_message)
-                await self.cmd_(message, player, channel, author, permissions, [], e['webpage_url'])
+                await self.cmd_재생(message, player, channel, author, permissions, [], e['webpage_url'])
                 return Response(self.str.get('cmd-search-accept', "Alright, coming right up!"), delete_after=30)
             elif str(reaction.emoji) == '\U0001F6AB':  # cross
                 await self.safe_delete_message(result_message)
@@ -1821,7 +1809,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}np
-
         Displays the current song in chat.
         """
 
@@ -1883,11 +1870,10 @@ class MusicBot(discord.Client):
                 delete_after=30
             )
 
-    async def cmd_summon(self, channel, guild, author, voice_channel):
+    async def cmd_들어와(self, channel, guild, author, voice_channel):
         """
         Usage:
             {command_prefix}summon
-
         Call the bot to the summoner's voice channel.
         """
 
@@ -1931,7 +1917,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}정지
-
         Pauses playback of the current song.
         """
 
@@ -1946,7 +1931,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}시작
-
         Resumes playback of a paused song.
         """
 
@@ -1960,8 +1944,7 @@ class MusicBot(discord.Client):
     async def cmd_랜덤(self, channel, player):
         """
         Usage:
-            {command_prefix}
-
+            {command_prefix}shuffle
         Shuffles the server's queue.
         """
 
@@ -1985,7 +1968,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}clear
-
         Clears the playlist.
         """
 
@@ -1996,7 +1978,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}remove [# in queue]
-
         Removes queued songs. If a number is specified, removes that song in the queue, otherwise removes the most recently queued song.
         """
 
@@ -2044,11 +2025,10 @@ class MusicBot(discord.Client):
                 self.str.get('cmd-remove-noperms', "You do not have the valid permissions to remove that entry from the queue, make sure you're the one who queued it or have instant skip permissions"), expire_in=20
             )
 
-    async def cmd_스킵(self, player, channel, author, message, permissions, voice_channel, param=''):
+    async def cmd_skip(self, player, channel, author, message, permissions, voice_channel, param=''):
         """
         Usage:
-            {command_prefix} [force/f]
-
+            {command_prefix}skip [force/f]
         Skips the current song when enough votes are cast.
         Owners and those with the instaskip permission can add 'force' or 'f' after the command to force skip.
         """
@@ -2124,7 +2104,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}volume (+/-)[volume]
-
         Sets the playback volume. Accepted values are from 1 to 100.
         Putting + or - before the volume will make the volume change relative to the current volume.
         """
@@ -2168,15 +2147,12 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}option [option] [on/y/enabled/off/n/disabled]
-
         Changes a config option without restarting the bot. Changes aren't permanent and
         only last until the bot is restarted. To make permanent changes, edit the
         config file.
-
         Valid options:
             autoplaylist, save_videos, now_playing_mentions, auto_playlist_random, auto_pause,
             delete_messages, delete_invoking, write_current_song
-
         For information about these options, see the option's comment in the config file.
         """
 
@@ -2221,7 +2197,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}queue
-
         Prints the current song queue.
         """
 
@@ -2271,7 +2246,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}clean [range]
-
         Removes up to [range] messages the bot has posted in chat. Default: 50, Max: 1000
         """
 
@@ -2305,7 +2279,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}pldump url
-
         Dumps the individual urls of a playlist
         """
 
@@ -2350,7 +2323,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}listids [categories]
-
         Lists the ids for various things.  Categories are:
            all, users, roles, channels
         """
@@ -2408,7 +2380,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}perms [@user]
-
         Sends the user a list of their permissions, or the permissions of the user specified.
         """
 
@@ -2433,7 +2404,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}setname name
-
         Changes the bot's username.
         Note: This operation is limited by discord to twice per hour.
         """
@@ -2457,7 +2427,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}setnick nick
-
         Changes the bot's nickname.
         """
 
@@ -2478,7 +2447,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}setavatar [url]
-
         Changes the bot's avatar.
         Attaching a file and leaving the url parameter blank also works.
         """
@@ -2501,7 +2469,7 @@ class MusicBot(discord.Client):
         return Response("Changed the bot's avatar.", delete_after=20)
 
 
-    async def cmd_disconnect(self, guild):
+    async def cmd_나가(self, guild):
         """
         Usage:
             {command_prefix}disconnect
@@ -2550,7 +2518,6 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}leaveserver <name/ID>
-
         Forces the bot to leave a server.
         When providing names, names are case-sensitive.
         """
