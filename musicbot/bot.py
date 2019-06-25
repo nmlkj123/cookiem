@@ -1352,7 +1352,7 @@ class MusicBot(discord.Client):
                         for i in res['tracks']['items']:
                             song_url = i['name'] + ' ' + i['artists'][0]['name']
                             log.debug('Processing {0}'.format(song_url))
-                            await self.cmd_play(message, player, channel, author, permissions, leftover_args, song_url)
+                            await self.cmd_재생(message, player, channel, author, permissions, leftover_args, song_url)
                         await self.safe_delete_message(procmesg)
                         return Response(self.str.get('cmd-play-spotify-album-queued', "Enqueued `{0}` with **{1}** songs.").format(res['name'], len(res['tracks']['items'])))
                     
@@ -1371,7 +1371,7 @@ class MusicBot(discord.Client):
                         for i in res:
                             song_url = i['track']['name'] + ' ' + i['track']['artists'][0]['name']
                             log.debug('Processing {0}'.format(song_url))
-                            await self.cmd_play(message, player, channel, author, permissions, leftover_args, song_url)
+                            await self.cmd_재생(message, player, channel, author, permissions, leftover_args, song_url)
                         await self.safe_delete_message(procmesg)
                         return Response(self.str.get('cmd-play-spotify-playlist-queued', "Enqueued `{0}` with **{1}** songs.").format(parts[-1], len(res)))
                     
@@ -1726,7 +1726,7 @@ class MusicBot(discord.Client):
                 # noinspection PyUnresolvedReferences
                 raise exceptions.CommandError(
                     self.str.get('cmd-search-noquery', "Please specify a search query.\n%s") % dedent(
-                        self.cmd_search.__doc__.format(command_prefix=self.config.command_prefix)),
+                        self.cmd_검색.__doc__.format(command_prefix=self.config.command_prefix)),
                     expire_in=60
                 )
 
@@ -1806,7 +1806,7 @@ class MusicBot(discord.Client):
 
             if str(reaction.emoji) == '\u2705':  # check
                 await self.safe_delete_message(result_message)
-                await self.cmd_play(message, player, channel, author, permissions, [], e['webpage_url'])
+                await self.cmd_(message, player, channel, author, permissions, [], e['webpage_url'])
                 return Response(self.str.get('cmd-search-accept', "Alright, coming right up!"), delete_after=30)
             elif str(reaction.emoji) == '\U0001F6AB':  # cross
                 await self.safe_delete_message(result_message)
