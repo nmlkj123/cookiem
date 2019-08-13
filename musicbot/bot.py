@@ -487,11 +487,11 @@ class MusicBot(discord.Client):
                 newmsg = '%s - your song `%s` is now playing in `%s`!' % (
                     entry.meta['author'].mention, entry.title, player.voice_client.channel.name)
             else:
-                newmsg = 'Now playing in `%s`: `%s` added by `%s`' % (
+                newmsg = '' % (
                     player.voice_client.channel.name, entry.title, entry.meta['author'].name)
         else:
             # no author (and channel), it's an autoplaylist (or autostream from my other PR) entry.
-            newmsg = 'Now playing automatically added entry `%s` in `%s`' % (
+            newmsg = '' % (
                 entry.title, player.voice_client.channel.name)
 
         if newmsg:
