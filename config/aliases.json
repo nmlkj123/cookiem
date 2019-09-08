@@ -3,7 +3,8 @@
     "skip": ["s"],
     "play": ["재생"],
     "skip": ["스킵"],
-    "queue": ["목록"],
+    "queue": ["q"],
+    "queue": ["재생목록"],
     "np": ["현재노래"],
     "shuffle": ["랜덤"],
     "pause" : ["정지"],
@@ -12,6 +13,6 @@
     "clear" : ["전체삭제"],
     "remove" : ["삭제"],
     "summon" : ["들어와"],
-    "disconnect" : ["나가"],
-    "queue": ["q"]
+    "disconnect" : ["나가"]
+    
 }
