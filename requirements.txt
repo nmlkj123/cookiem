@@ -1,9 +1,9 @@
-discord.py[voice]==1.2.3
+discord.py[voice]>=1.2.5
 pip
-youtube_dl==2019.10.16
+youtube_dl>=2019.10.16
 colorlog
 cffi --only-binary all; 
-aiohttp ~= 3.5.4
+aiohttp>=3.3.0,<3.6.0
 websockets>=6.0,<7.0
 chardet
 opuslib
