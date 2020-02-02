@@ -489,11 +489,11 @@ class MusicBot(discord.Client):
                 newmsg = '%s - your song `%s` is now playing in `%s`!' % (
                     entry.meta['author'].mention, entry.title, player.voice_client.channel.name)
             else:
-                newmsg = '❤️ 다음곡을 재생합니다.❤️ \n\n🍃 채널 : %s\n🍄 제목 : `%s`\n🕴️ 신청자 : %s\n⭐ 명령어 : !재생 링크or곡이름,!검색 곡이름,!스킵,!재생목록,!현재노래\n\n 🎬 %s ' % (
+                newmsg = '❤️ 다음곡을 재생합니다.❤️ \n\n🍃 채널 : %s\n🍄 제목 : `%s`\n🕴️ 신청자 : %s\n 🎬 %s\n⭐ 명령어 : !재생 링크or곡이름,!검색 곡이름,!스킵,!재생목록,!현재노래 ' % (
                     player.voice_client.channel.name, entry.title, entry.meta['author'].name,entry.url)
         else:
             # no author (and channel), it's an autoplaylist (or autostream from my other PR) entry.
-            newmsg = '❤️ 다음곡을 재생합니다.❤️ \n\n🍃 채널 : %s\n🍄 제목 : `%s`\n⭐ 명령어 : !재생 링크or곡이름,!검색 곡이름,!스킵,!재생목록,!현재노래\n\n 🎬 %s ' % (
+            newmsg = '❤️ 다음곡을 재생합니다.❤️ \n\n🍃 채널 : %s\n🍄 제목 : `%s`\n 🎬 %s\n⭐ 명령어 : !재생 링크or곡이름,!검색 곡이름,!스킵,!재생목록,!현재노래 ' % (
                 player.voice_client.channel.name,entry.title,entry.url)
 
         if newmsg:
