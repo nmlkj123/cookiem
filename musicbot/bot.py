@@ -493,7 +493,7 @@ class MusicBot(discord.Client):
                     player.voice_client.channel.name, entry.title, entry.meta['author'].name)
         else:
             # no author (and channel), it's an autoplaylist (or autostream from my other PR) entry.
-            newmsg = '❤️ 다음곡을 재생합니다. \n곡 : `%s`\n %s \n 명령어 !재생 링크or곡이름,!검색 곡이름,!스킵,!재생목록,!현재노래' % (
+            newmsg = '❤️ 다음곡을 재생합니다. \n곡 : `%s`\n ❔명령어 :❕재생 링크or곡이름,❕검색 곡이름,❕스킵,❕재생목록,❕현재노래\n %s ' % (
                 entry.title,entry.url)
 
         if newmsg:
